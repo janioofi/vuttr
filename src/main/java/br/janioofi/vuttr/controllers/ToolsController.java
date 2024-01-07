@@ -5,6 +5,8 @@ import br.janioofi.vuttr.domain.entities.Tools;
 import br.janioofi.vuttr.domain.services.ToolsService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -13,14 +15,11 @@ import java.util.List;
 
 @Tag(name = "Tools", description = "API Tools")
 @RestController
+@RequiredArgsConstructor
 @SecurityRequirement(name = "bearer-key")
 @RequestMapping("/tools")
 public class ToolsController {
     private final ToolsService service;
-
-    public ToolsController(ToolsService service) {
-        this.service = service;
-    }
 
     @GetMapping
     public ResponseEntity<List<Tools>> findAll(){
@@ -41,5 +40,10 @@ public class ToolsController {
     @GetMapping("/tag")
     public ResponseEntity<List<Tools>> findByTag(@RequestParam String tag){
         return ResponseEntity.ok().body(service.findByTag(tag));
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Tools> findById(@PathVariable Long id){
+        return ResponseEntity.ok().body(service.findById(id));
     }
 }

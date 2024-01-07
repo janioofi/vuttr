@@ -25,7 +25,15 @@ public class ToolsService {
         data.setDescription(tools.description());
         data.setLink(tools.link());
         data.setTitle(tools.title());
-        data.setTags(tools.tags());
+        data.setTags(tools.tags().stream().map(e ->  e.toLowerCase()).toList());
         return repository.save(data);
+    }
+
+    public List<Tools> findByTag(String tag){
+        return repository.findToolsByTagsContains(tag);
+    }
+
+    public void deleteById(Long id){
+        repository.deleteById(id);
     }
 }

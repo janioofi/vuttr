@@ -27,4 +27,10 @@ public class ToolsController {
     public ResponseEntity<Tools> create(@RequestBody ToolsDto tools){
         return ResponseEntity.status(HttpStatus.CREATED).body(service.create(tools));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable Long id){
+        service.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
 }

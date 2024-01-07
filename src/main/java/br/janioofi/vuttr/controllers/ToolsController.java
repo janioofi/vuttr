@@ -3,6 +3,7 @@ package br.janioofi.vuttr.controllers;
 import br.janioofi.vuttr.domain.DTO.ToolsDto;
 import br.janioofi.vuttr.domain.entities.Tools;
 import br.janioofi.vuttr.domain.services.ToolsService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import java.util.List;
 
 @Tag(name = "Tools", description = "API Tools")
 @RestController
+@SecurityRequirement(name = "bearer-key")
 @RequestMapping("/tools")
 public class ToolsController {
     private final ToolsService service;

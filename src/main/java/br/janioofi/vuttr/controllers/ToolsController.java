@@ -1,11 +1,11 @@
 package br.janioofi.vuttr.controllers;
 
+import br.janioofi.vuttr.domain.DTO.ToolsDto;
 import br.janioofi.vuttr.domain.entities.Tools;
 import br.janioofi.vuttr.domain.services.ToolsService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,9 +17,14 @@ public class ToolsController {
     public ToolsController(ToolsService service) {
         this.service = service;
     }
-    
+
     @GetMapping
     public ResponseEntity<List<Tools>> findAll(){
         return ResponseEntity.ok().body(service.findAll());
+    }
+
+    @PostMapping
+    public ResponseEntity<Tools> create(@RequestBody ToolsDto tools){
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.create(tools));
     }
 }

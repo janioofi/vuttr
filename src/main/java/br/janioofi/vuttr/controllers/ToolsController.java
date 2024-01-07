@@ -33,4 +33,9 @@ public class ToolsController {
         service.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping("/tag")
+    public ResponseEntity<List<Tools>> findByTag(@RequestParam String tag){
+        return ResponseEntity.ok().body(service.findByTag(tag));
+    }
 }
